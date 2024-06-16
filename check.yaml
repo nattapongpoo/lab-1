@@ -1,0 +1,74 @@
+Name:                 metrics-server-54f5549859-psn4g
+Namespace:            metrics-server
+Priority:             2000000000
+Priority Class Name:  system-cluster-critical
+Service Account:      metrics-server
+Node:                 docker-desktop/192.168.65.3
+Start Time:           Sun, 16 Jun 2024 14:19:42 +0700
+Labels:               app.kubernetes.io/instance=metrics-server
+                      app.kubernetes.io/name=metrics-server
+                      pod-template-hash=54f5549859
+Annotations:          <none>
+Status:               Running
+IP:                   10.1.0.59
+IPs:
+  IP:           10.1.0.59
+Controlled By:  ReplicaSet/metrics-server-54f5549859
+Containers:
+  metrics-server:
+    Container ID:    docker://5353bda4bcf9471401c119074564998bff2fb683a552cb8efc794342029d2cc1
+    Image:           registry.k8s.io/metrics-server/metrics-server:v0.7.1
+    Image ID:        docker-pullable://registry.k8s.io/metrics-server/metrics-server@sha256:db3800085a0957083930c3932b17580eec652cfb6156a05c0f79c7543e80d17a
+    Port:            10250/TCP
+    Host Port:       0/TCP
+    SeccompProfile:  RuntimeDefault
+    Args:
+      --secure-port=10250
+      --cert-dir=/tmp
+      --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+      --kubelet-use-node-status-port
+      --metric-resolution=15s
+    State:          Running
+      Started:      Sun, 16 Jun 2024 14:19:55 +0700
+    Ready:          False
+    Restart Count:  0
+    Requests:
+      cpu:        100m
+      memory:     200Mi
+    Liveness:     http-get https://:https/livez delay=0s timeout=1s period=10s #success=1 #failure=3
+    Readiness:    http-get https://:https/readyz delay=20s timeout=1s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /tmp from tmp (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-tnnzb (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  tmp:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  kube-api-access-tnnzb:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age               From               Message
+  ----     ------     ----              ----               -------
+  Normal   Scheduled  90s               default-scheduler  Successfully assigned metrics-server/metrics-server-54f5549859-psn4g to docker-desktop
+  Normal   Pulling    90s               kubelet            Pulling image "registry.k8s.io/metrics-server/metrics-server:v0.7.1"
+  Normal   Pulled     78s               kubelet            Successfully pulled image "registry.k8s.io/metrics-server/metrics-server:v0.7.1" in 11.894s (11.894s including waiting)
+  Normal   Created    78s               kubelet            Created container metrics-server
+  Normal   Started    78s               kubelet            Started container metrics-server
+  Warning  Unhealthy  0s (x7 over 50s)  kubelet            Readiness probe failed: HTTP probe failed with statuscode: 500
